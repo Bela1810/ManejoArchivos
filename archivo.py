@@ -1,10 +1,10 @@
-from typing import Any
+from typing import Dict, Any
 
 class AnalizadorEventos:
     def __init__(self, nombre_archivo: str):
         self.nombre_archivo = nombre_archivo
 
-    def procesar_eventos(self) -> dict[str, Any]:
+    def procesar_eventos(self) -> Dict[str, Any]:
         total_eventos_registrados = 0
         eventos_por_tipo = {}
         eventos_por_servidor = {}
@@ -23,8 +23,12 @@ class AnalizadorEventos:
                     nombre_servidor = linea.strip().split(": ")[1]
                     eventos_por_servidor[nombre_servidor] = eventos_por_servidor.get(nombre_servidor, 0) + 1
 
-        estadisticas = {"Total Eventos": total_eventos_registrados,"Eventos por tipo": eventos_por_tipo,"Eventos por servidor": eventos_por_servidor}
-        return estadisticas
+        Total_Eventos = f"Total Eventos: {total_eventos_registrados}"
+        Eventos_Tipo = f"Eventos por tipo: {eventos_por_tipo}"
+        Eventos_Servidor = f"Eventos por Servidor: {eventos_por_servidor}"
+
+        return Total_Eventos, Eventos_Tipo, Eventos_Servidor
+
 
 Analizar_1 = AnalizadorEventos("eventos.txt")
 resultado = Analizar_1.procesar_eventos()
